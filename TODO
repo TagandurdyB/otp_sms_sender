@@ -1,0 +1,9 @@
+ '''// Data payload for the Android app to handle SMS sending
+            $data = [
+                'phone' => $phone,
+                'otp' => $code,
+                'action' => 'SEND_SMS',
+                'message' => sprintf('%s: %s', _('main.otp_code'), $code),
+                'sms_type' => 'OTP',
+                'request_id' => uniqid('sms', true), // For tracking/logging
+            ];'''
