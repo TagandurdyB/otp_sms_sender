@@ -64,7 +64,7 @@ class _SendSmsPageState extends State<SendSmsPage> {
                 SmsSenderBgService.sendSms(
                   _phoneControl.text,
                   _message.text,
-                  simSlot: (int.tryParse(_slotControl.text) ?? 0) + 1,
+                  simSlot:( int.tryParse(_slotControl.text)??0) +1,
                 );
               },
               color: Colors.blue,
