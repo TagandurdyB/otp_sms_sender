@@ -37,7 +37,9 @@ void handleMessage(Map<String, dynamic>? payload) async {
         simSlot: log.slotIndex + 1,
       );
       log = log.copyWith(status: status);
-      await smsStatus(log);
+      if (status) {
+        await smsStatus(log);
+      }
       Boxes.init().then(
         (value) {
           Boxes.logs.put(log.hashId, log);
@@ -49,7 +51,7 @@ void handleMessage(Map<String, dynamic>? payload) async {
   }
 }
 
-/**/
+/// /
 Future smsStatus(LogEntity data) async {
   try {
     _dio.post(
@@ -64,7 +66,7 @@ Future smsStatus(LogEntity data) async {
     print('Error: $e ||||||||| $s');
   }
 }
-/**/
+/// /
 
 class NotificationService {
 //Local================================================================
