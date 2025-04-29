@@ -23,15 +23,16 @@ class LogModelAdapter extends TypeAdapter<LogModel> {
       message: fields[3] as String,
       smsType: fields[4] as String,
       requestId: fields[5] as String,
-      slotIndex: fields[7] as int,
       hashId: fields[6] as String,
+      slotIndex: fields[7] as int,
+      status: fields[8] ?? false,
     );
   }
 
   @override
   void write(BinaryWriter writer, LogModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.phone)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class LogModelAdapter extends TypeAdapter<LogModel> {
       ..writeByte(6)
       ..write(obj.hashId)
       ..writeByte(7)
-      ..write(obj.slotIndex);
+      ..write(obj.slotIndex)
+      ..writeByte(8)
+      ..write(obj.status);
   }
 
   @override

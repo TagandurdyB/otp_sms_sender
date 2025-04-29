@@ -44,7 +44,6 @@ class _SendSmsPageState extends State<SendSmsPage> {
                 hintText: 'Content...',
                 border: OutlineInputBorder(),
               ),
-              keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 8),
             TextField(

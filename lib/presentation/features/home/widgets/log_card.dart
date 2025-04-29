@@ -35,7 +35,14 @@ class LogCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      obj.phone,
+                      "SIM ${obj.slotIndex}: ${Boxes.senders.values.firstWhere((s) => s.simSlot == obj.slotIndex).phone}",
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      "To: ${obj.phone}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -48,7 +55,15 @@ class LogCard extends StatelessWidget {
                         color: Colors.grey[400],
                         fontSize: 15,
                       ),
-                    )
+                    ),
+                    if (obj.status)
+                      Text(
+                        'STATUS:FALSE',
+                        style: TextStyle(
+                          color: Colors.red[400],
+                          fontSize: 13,
+                        ),
+                      ),
                   ],
                 ),
               ),

@@ -21,6 +21,8 @@ class LogModel {
   String hashId;
   @HiveField(7)
   int slotIndex;
+  @HiveField(8)
+  bool status;
   LogModel({
     required this.phone,
     required this.otp,
@@ -28,8 +30,9 @@ class LogModel {
     required this.message,
     required this.smsType,
     required this.requestId,
-    required this.slotIndex,
     this.hashId = '',
+    required this.slotIndex,
+    this.status = false,
   }) {
     if (hashId == '') {
       hashId = DateTime.now().toLocal().toString();
@@ -45,6 +48,7 @@ class LogModel {
     String? requestId,
     String? hashId,
     int? slotIndex,
+    bool? status,
   }) {
     return LogModel(
       phone: phone ?? this.phone,
@@ -55,17 +59,19 @@ class LogModel {
       requestId: requestId ?? this.requestId,
       hashId: hashId ?? this.hashId,
       slotIndex: slotIndex ?? this.slotIndex,
+      status: status ?? this.status,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'phone': phone,
-      'otp': otp,
-      'action': action,
-      'message': message,
-      'sms_type': smsType,
-      'requestId': requestId,
+      // 'otp': otp,
+      // 'action': action,
+      // 'message': message,
+      // 'sms_type': smsType,
+      'message_id': requestId,
+      'status': status,
     };
   }
 
@@ -76,14 +82,14 @@ class LogModel {
       action: map['action'] as String,
       message: map['message'] as String,
       smsType: map['sms_type'] as String,
-      requestId: map['request_id'] as String,
-      slotIndex: int.tryParse(map['sim_slot']??'0') ??0,
+      requestId: map['message_id'] ?? '???',
+      slotIndex: int.tryParse(map['sim_slot'] ?? '0') ?? 0,
     );
   }
 
   @override
   String toString() {
-    return 'LogModel(phone: $phone, otp: $otp, action: $action, message: $message, smsType: $smsType, requestId: $requestId, hashId: $hashId, slotIndex: $slotIndex)';
+    return 'LogModel(phone: $phone, otp: $otp, action: $action, message: $message, smsType: $smsType, requestId: $requestId, hashId: $hashId, slotIndex: $slotIndex, status: $status)';
   }
 
   @override
@@ -97,7 +103,8 @@ class LogModel {
         other.smsType == smsType &&
         other.requestId == requestId &&
         other.hashId == hashId &&
-        other.slotIndex == slotIndex;
+        other.slotIndex == slotIndex &&
+        other.status == status;
   }
 
   @override
@@ -109,6 +116,7 @@ class LogModel {
         smsType.hashCode ^
         requestId.hashCode ^
         hashId.hashCode ^
-        slotIndex.hashCode;
+        slotIndex.hashCode ^
+        status.hashCode;
   }
 }

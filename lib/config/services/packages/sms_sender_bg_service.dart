@@ -30,7 +30,7 @@ class SmsSenderBgService {
     }
   }
 
-  static Future<void> sendSms(
+  static Future<bool> sendSms(
     String phoneNumber,
     String message, {
     int simSlot = 0,
@@ -53,10 +53,10 @@ class SmsSenderBgService {
       );
 
       _status = success ? 'SMS sent successfully' : 'Failed to send SMS';
-
-      if (success) {}
+      return success;
     } on PlatformException catch (e) {
-      throw 'Error sending SMS: ${e.message}';
+      // throw 'Error sending SMS: ${e.message}';
     }
+    return false;
   }
 }
